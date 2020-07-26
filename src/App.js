@@ -4,6 +4,7 @@ import Home from './components/Home'
 import About from './components/About'
 import Store from './components/Store'
 import Contact from './components/Contact'
+import LaunchIndex from './components/LaunchIndex'
 
 import './App.css';
 
@@ -20,7 +21,8 @@ function App() {
         
     <Route exact path="/home" component={Home}>Home</Route>
     <Route path="/about"component={About}>About</Route>
-    <Route path="/store"component={Store}>Store</Route>
+    <Route path="store"component={Store}>Store</Route>
+      <Route path="LaunchIndex" component={LaunchIndex}></Route>
     <Route path="/contact"component={Contact}>Contact</Route>
 
     </BrowserRouter>
