@@ -1,35 +1,86 @@
-import React from 'react';
-import {BrowserRouter, Route, Link} from 'react-router-dom'
+import React from 'react'
+import Launch from './components/Launch'
 import Home from './components/Home'
-import About from './components/About'
-import Store from './components/Store'
 import Contact from './components/Contact'
-import LaunchIndex from './components/LaunchIndex'
+import About from './components/About Us'
+import DenseAppBar from './NavBar'
+import { Link, BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
 
-import './App.css';
 
-function App() {
-  return (
-  
-    <BrowserRouter>
-    <nav>
-   <li> <Link className="anchor" to="Home" >Home</Link></li>
-   <li> <Link className="anchor" to="About" >About</Link></li>
-    <li><Link className="anchor" to="Store" >Store</Link></li>
-    <li><Link className="anchor" to="Contact" >Contac Us</Link></li>
-    </nav>
-        
-    <Route exact path="/home" component={Home}>Home</Route>
-    <Route path="/about"component={About}>About</Route>
-    <Route path="store"component={Store}>Store</Route>
-      <Route path="LaunchIndex" component={LaunchIndex}></Route>
-    <Route path="/contact"component={Contact}>Contact</Route>
+const App1=()=>{
 
-    </BrowserRouter>
-    
-    
-    
-  );
+    return(
+        <BrowserRouter>
+        <DenseAppBar/>
+
+
+<Routes>.
+<Route path="Home" element={<Home/>}/>
+<Route path="Contact" element={<Contact/>}/>
+<Route path="About" element={<About/>}/>
+<Route path="Launch" element={<Launch/>}>
+    <Route path="/" element={<LaunchIndex/>}/>
+    <Route path=":item" element={<LaunchShoe/>}/>
+</Route>
+</Routes>
+
+</BrowserRouter>
+    )
 }
+export default App1;
 
-export default App;
+
+/////////////////////////////////////////////////
+const LaunchIndex =()=>{
+
+    return(
+
+        <div><h>Welcome to LaunchIndex</h>
+        <ul>
+            {
+                Object.entries(shoes).map(([item,{name,img}])=>{
+                 return   (<li key={item}><Link to={`/Launch/${item}`}>
+                        <h1>{name}</h1>
+                        <img src={img}/>
+                        </Link>
+                        </li>)
+                })
+            }
+        </ul>
+        </div>
+    )
+}
+//////////////////////////////////////////////////////
+const LaunchShoe=()=>{
+    const {item} = useParams()
+    const Shoe = shoes[item]
+  if(!Shoe){
+      return <h2>Not Found</h2>
+  }
+  const {name, img} = Shoe;
+  return(
+<div>
+  <h1>{name}</h1>
+  <img src={img} alt={name}/>
+  </div>
+)}
+
+///////////////////////////////////////////////////////
+
+const shoes = {
+    "air-jordan-3-valor-blue": {
+      name: "VALOUR BLUE",
+      img:
+        "https://secure-images.nike.com/is/image/DotCom/CT8532_104_A_PREM?$SNKRS_COVER_WD$&align=0,1"
+    },
+    "jordan-mars-270-london": {
+      name: "JORDAN MARS 270 LONDON",
+      img:
+        "https://secure-images.nike.com/is/image/DotCom/CV3042_001_A_PREM?$SNKRS_COVER_WD$&align=0,1"
+    },
+    "air-jordan-1-zoom-racer-blue": {
+      name: "RACER BLUE",
+      img:
+        "https://secure-images.nike.com/is/image/DotCom/CK6637_104_A_PREM?$SNKRS_COVER_WD$&align=0,1"
+    }
+  };
